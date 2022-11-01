@@ -19,6 +19,7 @@ int main()
   double maxTotalDonation = 0;
   int maxTotalCollector = 0;
   int donationCount;
+  int maxDonationCount;
   // read data
   string line;
   // read the lines from the file
@@ -28,26 +29,25 @@ int main()
     donationCount = 0;
     int uin;
     string tmp;
-    // breaking line into words using string stream
     istringstream ss(line);
-    // read collector
     ss >> uin;
-    // calculate total donation
     while (ss >> tmp)
     {
-      // convert from string to float
+      // convert from string to double
       donation += stod(tmp);
       donationCount++;
     }
-    // check if donation is greater than maxTotalDonation
+    // check if donation is greater than maxTotalDonation and count
     if (maxTotalDonation < donation && donationCount > 1)
     {
       maxTotalDonation = donation;
       maxTotalCollector = uin;
+      maxDonationCount = donationCount;
     }
+    // cout << "amount of donations for " << uin << " is " << donationCount << endl;
   }
 
-  if(donationCount > 1){
+  if(maxDonationCount > 1){
     cout << "Highest donation total: " << maxTotalDonation << endl;
     cout << "-- collected by id: " << maxTotalCollector << endl;
   }
